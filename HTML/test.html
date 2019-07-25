@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Title of the document</title>
+
+    <script>
+        var cef = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof CefSharp != "undefined") {
+                cef = CefSharp;
+
+                // Bind object cefSharp
+                cef.BindObjectAsync("boundAsync", "bound").then(function (result) {
+                    console.log(result)
+                })
+            }
+        }, false);
+
+        function jsFunction(parametro) {
+            alert(parametro);
+        }
+
+        function winFormFunction() {
+            if (cef == null)
+                return
+
+            boundAsync.testWinForm("from js");
+        }
+    </script>
+
+</head>
+
+<body>
+    The content of the document......
+
+    <input type="button" value="invoke winform function" onclick="winFormFunction()">
+</body>
+
+</html>
